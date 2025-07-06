@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Nourished Household</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+        .nav-link {
+            @apply px-4 py-2 text-gray-700 hover:bg-emerald-100 hover:text-emerald-800 rounded-md transition-colors duration-300;
+        }
+        .nav-link.active {
+            @apply bg-emerald-600 text-white hover:bg-emerald-700;
+        }
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+        .table-cell {
+            @apply p-3 border-b border-gray-200 align-top;
+        }
+        .table-header {
+            @apply p-3 text-left text-sm font-semibold text-gray-600 uppercase tracking-wider bg-gray-50;
+        }
+        /* Styles for the new AI features */
+        .ai-feature-box {
+            @apply bg-emerald-50 border-2 border-dashed border-emerald-200 rounded-lg p-6 my-8;
+        }
+        .variation-btn {
+            @apply ml-2 px-2 py-1 text-xs bg-amber-200 text-amber-800 rounded-full hover:bg-amber-300 transition-all transform hover:scale-110;
+        }
+        /* Modal styles */
+        .modal-overlay {
+            @apply fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50;
+        }
+        .modal-content {
+            @apply bg-white rounded-lg shadow-xl p-8 max-w-md w-full;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <div id="app" class="max-w-7xl mx-auto bg-white shadow-lg">
+        
+        <!-- Header & Navigation -->
+        <header class="p-6 border-b border-gray-200">
+            <div class="flex justify-between items-center">
+                <h1 class="text-4xl text-emerald-800">The Nourished Household</h1>
+                <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-gray-700 hover:bg-gray-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+            <nav id="main-nav" class="hidden md:flex justify-center mt-4 space-x-2">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#about" class="nav-link">About Me</a>
+                <a href="#philosophy" class="nav-link">My Philosophy</a>
+                <a href="#plan" class="nav-link">The 21-Day Plan</a>
+                <a href="#grocery" class="nav-link">Grocery Strategy</a>
+                <a href="#baking" class="nav-link">Healthy Baking</a>
+            </nav>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="p-6 md:p-10">
+            
+            <!-- Home Section -->
+            <section id="home" class="content-section active">
+                <div class="bg-emerald-50 rounded-lg p-8 text-center">
+                    <h2 class="text-5xl text-emerald-900 mb-4">Welcome to a Healthier, Happier Home</h2>
+                    <p class="text-lg text-gray-700 max-w-3xl mx-auto mb-6">
+                        As a dietitian and a mom over 40, I understand the beautiful chaos of managing a multi-generational family. This space is dedicated to helping you navigate the world of nutrition with a practical, delicious, and stress-free meal plan that nourishes everyone you love.
+                    </p>
+                    <a href="#plan" class="inline-block bg-emerald-600 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-emerald-700 transition-transform transform hover:scale-105">View The Plan</a>
+                </div>
+                <div class="mt-12 grid md:grid-cols-3 gap-8">
+                    <div class="bg-white p-6 rounded-lg border border-gray-200">
+                        <h3 class="text-2xl text-emerald-800 mb-3">For Every Family Member</h3>
+                        <p>A single plan thoughtfully designed for the unique needs of menopausal women, growing teens, and diabetic-friendly, heart-healthy seniors.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg border border-gray-200">
+                        <h3 class="text-2xl text-emerald-800 mb-3">Globally Inspired Flavors</h3>
+                        <p>Embrace the Filipino, Italian, Thai, and other cuisines your family loves, all with a healthy, dietitian-approved twist.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg border border-gray-200">
+                        <h3 class="text-2xl text-emerald-800 mb-3">Practical & Cost-Effective</h3>
+                        <p>Learn how to minimize food waste and save money with a smart "capsule pantry" approach and strategic bulk shopping.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- About Me Section -->
+            <section id="about" class="content-section">
+                <h2 class="text-4xl text-emerald-900 mb-6">A Little About Me</h2>
+                <div class="flex flex-col md:flex-row gap-8 items-center">
+                    <div class="md:w-1/3">
+                        <img src="https://placehold.co/400x400/a7f3d0/105c48?text=Your+Photo" alt="A friendly portrait of the dietitian" class="rounded-full shadow-lg">
+                    </div>
+                    <div class="md:w-2/3">
+                        <p class="text-lg mb-4">Hello! I'm so glad you're here. I'm a registered dietitian with over 20 years of experience, but more importantly, I'm a mom, a daughter, and a woman over 40 who gets it. I've navigated the hormonal shifts of menopause, managed the appetites of growing teenagers, and helped my own family members with their specific health needs.</p>
+                        <p class="text-lg mb-4">My professional expertise is grounded in real-world experience. I know that meal plans have to be more than just nutritious—they have to be realistic, delicious, and adaptable to the beautiful chaos of family life. My passion is to empower women and families to find joy and confidence in the kitchen, creating meals that are both good for the body and good for the soul.</p>
+                        <p class="text-lg">This website is a culmination of my professional knowledge and personal journey, created to be the resource I wished I had years ago. My hope is that it brings health, simplicity, and a lot of deliciousness to your table.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- My Philosophy Section -->
+            <section id="philosophy" class="content-section">
+                <h2 class="text-4xl text-emerald-900 mb-6">My Food Philosophy</h2>
+                <p class="text-lg mb-8 max-w-4xl">I believe healthy eating shouldn't be about restriction, but about abundance and balance. It's about using whole, flavorful ingredients to create meals that satisfy our cravings and support our long-term health. This plan is built on a few core principles:</p>
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-2xl text-emerald-800 mb-2">Balance Over Restriction</h3>
+                        <p>We incorporate everything your family loves—from pasta and homemade pizza to comforting white rice. The key is balance. By pairing carbohydrates with ample protein, healthy fats, and high-fiber vegetables, we slow down sugar absorption, manage cholesterol, and keep everyone feeling full and satisfied.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl text-emerald-800 mb-2">Nourishing Through Life Stages</h3>
+                        <p>A woman's body in her 40s and beyond needs lean protein for muscle, calcium for bones, and fiber for hormonal balance. A diabetic senior needs consistent carbohydrates and heart-healthy fats. Growing teens need energy and nutrients for development. This plan addresses all these needs simultaneously, not with separate meals, but with one adaptable, family-style meal.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl text-emerald-800 mb-2">The Power of Homemade</h3>
+                        <p>Taking control of your ingredients is empowering. By baking your own bread, muffins, and pizza dough, you can enhance their nutritional value by adding fiber and reducing sugar. This plan celebrates and encourages your love for home baking.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl text-emerald-800 mb-2">Cook Once, Eat Well All Week</h3>
+                        <p>Practicality is everything. We focus on a "capsule pantry" and strategic meal prep. By cooking a large batch of a core ingredient (like a roast chicken or a pot of chili), we create easy, delicious leftovers that transform into entirely new meals, saving you time, money, and stress.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 21-Day Plan Section -->
+            <section id="plan" class="content-section">
+                <h2 class="text-4xl text-emerald-900 mb-6">The Optimized 21-Day Meal Plan</h2>
+                <p class="text-lg mb-4">This plan is designed to be efficient, cost-effective, and delicious, using a core set of ingredients each week in creative ways. Use the tabs to explore the plan, or try our new AI-powered tools to get even more ideas!</p>
+                
+                <!-- ✨ AI Recipe Creator -->
+                <div class="ai-feature-box">
+                    <h3 class="text-2xl text-emerald-800 mb-3">✨ AI Recipe Creator</h3>
+                    <p class="text-gray-700 mb-4">Have leftovers or random ingredients? Enter them below and let our AI assistant create a simple, healthy recipe for you.</p>
+                    <div class="flex flex-col sm:flex-row gap-2">
+                        <input type="text" id="recipe-ingredients" placeholder="e.g., chicken, broccoli, rice" class="flex-grow p-2 border border-gray-300 rounded-md">
+                        <button id="generate-recipe-btn" class="bg-emerald-600 text-white px-6 py-2 rounded-md font-semibold hover:bg-emerald-700">Create Recipe</button>
+                    </div>
+                    <div id="recipe-output" class="mt-4 p-4 bg-white rounded-md border border-gray-200 min-h-[50px]"></div>
+                </div>
+
+                <!-- Week Navigation -->
+                <div class="flex justify-center border-b mb-6">
+                    <button class="week-tab active p-4 text-lg font-semibold border-b-2 border-emerald-600 text-emerald-600" data-week="week1">Week 1</button>
+                    <button class="week-tab p-4 text-lg font-semibold border-b-2 border-transparent text-gray-500 hover:text-emerald-600" data-week="week2">Week 2</button>
+                    <button class="week-tab p-4 text-lg font-semibold border-b-2 border-transparent text-gray-500 hover:text-emerald-600" data-week="week3">Week 3</button>
+                </div>
+
+                <!-- Week 1 Content -->
+                <div id="week1" class="week-content">
+                    <h3 class="text-3xl text-center text-emerald-800 mb-4">Week 1: The Chicken, Ground Turkey & Chickpea Trio</h3>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white meal-plan-table">
+                            <thead>
+                                <tr>
+                                    <th class="table-header">Day</th>
+                                    <th class="table-header">Dinner</th>
+                                    <th class="table-header">🧊 Freezer-Friendly Notes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td class="table-cell font-bold">Monday</td><td class="table-cell"><span><strong>Hearty Turkey Chili:</strong> A big pot of chili made with ground turkey, kidney & black beans, and canned tomatoes. Served with toppings like Greek yogurt or avocado.</span><button class="variation-btn">✨ Vary It</button></td><td class="table-cell"><strong>Perfect.</strong> Make a double batch. Cool completely and freeze in family-sized portions.</td></tr>
+                                <tr><td class="table-cell font-bold">Tuesday</td><td class="table-cell"><span><strong>Turkey Burger Night:</strong> Lean ground turkey patties on homemade buns. Served with lettuce, tomato, and crispy roasted potato wedges.</span><button class="variation-btn">✨ Vary It</button></td><td class="table-cell"><strong>Excellent.</strong> Form patties and freeze them raw, separated by parchment paper.</td></tr>
+                                <tr><td class="table-cell font-bold">Wednesday</td><td class="table-cell"><span><strong>Classic Roast Chicken:</strong> A whole roasted chicken served with roasted carrots, onions, and potatoes that cook in the same pan.</span><button class="variation-btn">✨ Vary It</button></td><td class="table-cell"><strong>Excellent (The Leftovers).</strong> Shred all leftover chicken meat and freeze in 2-cup bags for future soups or quesadillas.</td></tr>
+                                <tr><td class="table-cell font-bold">Thursday</td><td class="table-cell"><span><strong>Chicken & Veggie Quesadillas:</strong> Use shredded chicken, bell peppers, onions, and spinach in tortillas. Served with salsa and guacamole.</span><button class="variation-btn">✨ Vary It</button></td><td class="table-cell">Best enjoyed fresh.</td></tr>
+                                <tr><td class="table-cell font-bold">Friday</td><td class="table-cell"><span><strong>"Clean Out the Fridge" Pizza Night:</strong> Homemade dough topped with leftover shredded chicken, bell peppers, onions, and spinach.</span><button class="variation-btn">✨ Vary It</button></td><td class="table-cell"><strong>The Dough.</strong> Freeze extra dough balls or assemble and freeze the whole unbaked pizza.</td></tr>
+                                <tr><td class="table-cell font-bold">Saturday</td><td class="table-cell"><span><strong>Pasta with Roasted Veggies:</strong> Whole wheat pasta tossed with roasted broccoli, bell peppers, and carrots.</span><button class="variation-btn">✨ Vary It</button></td><td class="table-cell">The roasted veggies can be frozen, but their texture will soften. Best fresh.</td></tr>
+                                <tr><td class="table-cell font-bold">Sunday</td><td class="table-cell"><span><strong>Sheet Pan Lemon Herb Chicken Thighs:</strong> Inexpensive chicken thighs roasted on one pan with broccoli florets and potato chunks.</span><button class="variation-btn">✨ Vary It</button></td><td class="table-cell">Cooked chicken thighs freeze well.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Week 2 Content -->
+                <div id="week2" class="week-content hidden">
+                    <h3 class="text-3xl text-center text-emerald-800 mb-4">Week 2: The Pork, Tofu & Lentil Trio</h3>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white meal-plan-table">
+                            <thead>
+                                <tr>
+                                    <th class="table-header">Day</th>
+                                    <th class="table-header">Dinner</th>
+                                    <th class="table-header">🧊 Freezer-Friendly Notes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td class="table-cell font-bold">Monday</td><td class="table-cell"><span><strong>Hearty Lentil Bolognese:</strong> A rich, savory sauce made with lentils and canned tomatoes. Served over whole-wheat spaghetti.</span><button class="variation-btn">✨ Vary It</button></td><td class="table-cell"><strong>Perfect.</strong> This sauce freezes beautifully. Make a double batch.</td></tr>
+                                <tr><td class="table-cell font-bold">Tuesday</td><td class="table-cell"><span><strong>Roasted Pork Loin with Sweet Potatoes:</strong> A simple pork loin roast served with roasted sweet potato wedges and steamed green beans.</span><button class="variation-btn">✨ Vary It</button></td><td class="table-cell"><strong>Good.</strong> Cooked pork loin can be sliced and frozen for future stir-fries or sandwiches.</td></tr>
+                                <tr><td class="table-cell font-bold">Wednesday</td><td class="table-cell"><span><strong>Pork Stir-fry:</strong> Leftover pork, sliced thin and stir-fried with fresh broccoli and bell peppers. Served with rice.</span><button class="variation-btn">✨ Vary It</button></td><td class="table-cell">Not recommended for freezing. Best fresh.</td></tr>
+                                <tr><td class="table-cell font-bold">Thursday</td><td class="table-cell"><span><strong>Baked Sesame Tofu:</strong> Cubed tofu baked in a sesame-soy glaze. Served with white rice and steamed broccoli.</span><button class="variation-btn">✨ Vary It</button></td><td class="table-cell"><strong>Good (with texture change).</strong> The baked tofu itself freezes well, becoming firmer and chewier.</td></tr>
+                                <tr><td class="table-cell font-bold">Friday</td><td class="table-cell"><span><strong>Thai Green Curry with Tofu:</strong> The rest of the tofu in a fragrant curry with bell peppers and spinach. Served with rice.</span><button class="variation-btn">✨ Vary It</button></td><td class="table-cell"><strong>Excellent.</strong> The curry freezes wonderfully.</td></tr>
+                                <tr><td class="table-cell font-bold">Saturday</td><td class="table-cell"><span><strong>"Margherita" Pizza Night:</strong> Simple pizza with tomato sauce, mozzarella, and fresh spinach.</span><button class="variation-btn">✨ Vary It</button></td><td class="table-cell"><strong>The Dough.</strong> Freeze extra dough balls.</td></tr>
+                                <tr><td class="table-cell font-bold">Sunday</td><td class="table-cell"><span><strong>One-Pan Sausage & Peppers:</strong> Italian sausage roasted with sliced onions and bell peppers. Serve on buns.</span><button class="variation-btn">✨ Vary It</button></td><td class="table-cell"><strong>Excellent.</strong> Freeze raw sausages or the cooked sausage and pepper mix.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Week 3 Content -->
+                <div id="week3" class="week-content hidden">
+                    <h3 class="text-3xl text-center text-emerald-800 mb-4">Week 3: The Ground Beef, Shrimp & Black Bean Trio</h3>
+                     <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white meal-plan-table">
+                            <thead>
+                                <tr>
+                                    <th class="table-header">Day</th>
+                                    <th class="table-header">Dinner</th>
+                                    <th class="table-header">🧊 Freezer-Friendly Notes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td class="table-cell font-bold">Monday</td><td class="table-cell"><span><strong>Classic Meat Sauce with Pasta:</strong> A rich sauce made with ground beef and canned tomatoes. Served over pasta.</span><button class="variation-btn">✨ Vary It</button></td><td class="table-cell"><strong>Perfect.</strong> Make a double batch of the sauce and freeze half.</td></tr>
+                                <tr><td class="table-cell font-bold">Tuesday</td><td class="table-cell"><span><strong>"Taco Tuesday" Beef Tacos:</strong> Ground beef with taco seasonings. Served in tortillas with toppings.</span><button class="variation-btn">✨ Vary It</button></td><td class="table-cell"><strong>Excellent.</strong> The cooked, seasoned taco meat freezes beautifully.</td></tr>
+                                <tr><td class="table-cell font-bold">Wednesday</td><td class="table-cell"><span><strong>Shrimp & Veggie Stir-fry:</strong> Frozen shrimp stir-fried with broccoli and bell peppers. Served with rice.</span><button class="variation-btn">✨ Vary It</button></td><td class="table-cell">Not recommended for freezing. A quick 15-minute meal.</td></tr>
+                                <tr><td class="table-cell font-bold">Thursday</td><td class="table-cell"><span><strong>Sheet Pan Shrimp Scampi:</strong> Shrimp tossed with garlic and olive oil, roasted with broccoli and cherry tomatoes.</span><button class="variation-btn">✨ Vary It</button></td><td class="table-cell">Best enjoyed fresh as reheated shrimp can become tough.</td></tr>
+                                <tr><td class="table-cell font-bold">Friday</td><td class="table-cell"><span><strong>Homemade Black Bean Burgers:</strong> Hearty patties made from black beans. Served on buns with toppings.</span><button class="variation-btn">✨ Vary It</button></td><td class="table-cell"><strong>Excellent.</strong> Form patties and freeze them raw, separated by parchment paper.</td></tr>
+                                <tr><td class="table-cell font-bold">Saturday</td><td class="table-cell"><span><strong>"Clean Out the Fridge" Pizza Night:</strong> Top with any leftover veggies like bell peppers and onions.</span><button class="variation-btn">✨ Vary It</button></td><td class="table-cell"><strong>The Dough.</strong> A great chance to make and freeze extra pizza dough.</td></tr>
+                                <tr><td class="table-cell font-bold">Sunday</td><td class="table-cell"><span><strong>Classic Beef & Broccoli:</strong> Thinly sliced beef or ground beef stir-fried with broccoli. Served with rice.</span><button class="variation-btn">✨ Vary It</button></td><td class="table-cell">Best enjoyed fresh.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Grocery Strategy Section -->
+            <section id="grocery" class="content-section">
+                <h2 class="text-4xl text-emerald-900 mb-6">A Smarter Grocery Strategy</h2>
+                <p class="text-lg mb-8">The key to a stress-free kitchen is a smart shopping strategy. We split our shopping into two types: a big monthly haul for shelf-stable and freezable items, and a quick weekly run for fresh produce. This saves time, money, and reduces food waste.</p>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-emerald-50 p-6 rounded-lg">
+                        <h3 class="text-2xl text-emerald-800 mb-3">Your Monthly Bulk Haul (Costco, etc.)</h3>
+                        <p class="mb-4">Stock your freezer and pantry once a month with these core items.</p>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li><strong>Freezer:</strong> Ground turkey/beef, whole chickens, chicken thighs, pork loin, Italian sausage, large bag of frozen shrimp, frozen fruit & veggies (berries, peas, corn).</li>
+                            <li><strong>Pantry:</strong> Olive oil, rice, rolled oats, flour, sugar, yeast, canned tomatoes (diced, sauce, paste), canned beans (black, kidney, chickpeas), canned coconut milk, pasta, broth, salsa, nut butters, nuts & seeds.</li>
+                            <li><strong>Long-Lasting Produce:</strong> Large bags of onions, garlic, potatoes, and carrots.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-100 p-6 rounded-lg">
+                        <h3 class="text-2xl text-gray-800 mb-3">Your Quick Weekly Top-Up</h3>
+                        <p class="mb-4">This should be a fast trip for the fresh items that bring your meals to life.</p>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li><strong>Fresh Produce:</strong> Leafy greens (spinach, lettuce), fresh vegetables (broccoli, bell peppers, celery, cucumbers), fresh fruit (tomatoes, avocados, lemons, bananas), fresh herbs.</li>
+                            <li><strong>Dairy & Refrigerated:</strong> Milk, Greek yogurt, tofu, fresh cheeses.</li>
+                            <li><strong>Check Your Stock:</strong> Quickly check if you're low on eggs or any other refrigerated staple.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Healthy Baking Section -->
+            <section id="baking" class="content-section">
+                <h2 class="text-4xl text-emerald-900 mb-6">Tips for Healthier Home Baking</h2>
+                <p class="text-lg mb-8">One of the best parts of this plan is that it embraces your love for baking! Here’s how you can easily boost the nutritional value of your homemade breads, muffins, and scones without sacrificing texture or flavor.</p>
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-2xl text-emerald-800 mb-2">The 50/50 Flour Swap</h3>
+                        <p>The easiest first step is to substitute half of the all-purpose flour in your recipe with <strong>white whole wheat flour</strong>. It's a whole grain flour with a milder taste and lighter color than traditional whole wheat, making it a perfect, almost unnoticeable nutritional upgrade.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl text-emerald-800 mb-2">Powerhouse Add-Ins for Fiber & Nutrients</h3>
+                        <p>For every cup of flour in your recipe, consider whisking in one or more of the following to create a custom, healthier blend:</p>
+                        <ul class="list-disc list-inside space-y-2 mt-4 pl-4 text-gray-700">
+                            <li><strong>2 Tbsp Oat Bran:</strong> Adds soluble fiber, great for heart health.</li>
+                            <li><strong>1-2 Tbsp Ground Flaxseed:</strong> A fantastic source of fiber and heart-healthy omega-3 fats.</li>
+                            <li><strong>1/4 Cup Almond Flour:</strong> Replaces 1/4 cup of the regular flour to add protein, healthy fats, and create a wonderfully tender crumb.</li>
+                            <li><strong>1-2 Tbsp Wheat Germ:</strong> Adds a toasty, nutty flavor along with B vitamins and minerals. (Store any blend with wheat germ in the fridge).</li>
+                        </ul>
+                    </div>
+                     <div>
+                        <h3 class="text-2xl text-emerald-800 mb-2">A Note on Liquids</h3>
+                        <p>Whole grains and fiber-rich add-ins are a bit more "thirsty" than plain white flour. You may find you need to add an extra tablespoon or two of liquid (like milk or water) to your batter or dough to achieve the right consistency. Trust your baker's intuition!</p>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="p-6 bg-gray-800 text-white text-center">
+            <p>&copy; 2025 The Nourished Household. Created with care.</p>
+            <div class="flex justify-center space-x-4 mt-2">
+                <a href="#" class="hover:text-emerald-300">Facebook</a>
+                <a href="#" class="hover:text-emerald-300">Instagram</a>
+                <a href="#" class="hover:text-emerald-300">Pinterest</a>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- AI Modal -->
+    <div id="ai-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h3 class="text-2xl text-emerald-800 mb-4" id="modal-title">✨ Meal Variation</h3>
+            <div id="modal-body" class="text-gray-700">
+                <p>Generating suggestion...</p>
+            </div>
+            <button id="modal-close-btn" class="mt-6 bg-gray-200 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-300">Close</button>
+        </div>
+    </div>
+
+
+    <script>
+        // --- Navigation ---
+        const navLinks = document.querySelectorAll('.nav-link');
+        const contentSections = document.querySelectorAll('.content-section');
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mainNav = document.getElementById('main-nav');
+
+        function navigateTo(hash) {
+            navLinks.forEach(link => link.classList.toggle('active', link.hash === hash));
+            contentSections.forEach(section => section.classList.toggle('active', section.id === hash.substring(1)));
+            window.scrollTo(0, 0);
+        }
+
+        if (window.location.hash) {
+            navigateTo(window.location.hash);
+        } else {
+            navigateTo('#home');
+        }
+
+        mainNav.addEventListener('click', e => {
+            if (e.target.tagName === 'A') {
+                e.preventDefault();
+                const hash = e.target.hash;
+                history.pushState(null, null, hash);
+                navigateTo(hash);
+                if (!mainNav.classList.contains('md:flex')) {
+                    mainNav.classList.add('hidden');
+                }
+            }
+        });
+        
+        document.querySelector('a[href="#plan"]').addEventListener('click', e => {
+            e.preventDefault();
+            const hash = e.target.hash;
+            history.pushState(null, null, hash);
+            navigateTo(hash);
+        });
+
+        window.addEventListener('popstate', () => navigateTo(window.location.hash || '#home'));
+        mobileMenuButton.addEventListener('click', () => mainNav.classList.toggle('hidden'));
+
+        const weekTabs = document.querySelectorAll('.week-tab');
+        const weekContents = document.querySelectorAll('.week-content');
+        weekTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                weekTabs.forEach(t => t.classList.remove('active', 'border-emerald-600', 'text-emerald-600'));
+                tab.classList.add('active', 'border-emerald-600', 'text-emerald-600');
+                const targetWeek = tab.getAttribute('data-week');
+                weekContents.forEach(content => content.classList.toggle('hidden', content.id !== targetWeek));
+            });
+        });
+
+        // --- Gemini API Integration ---
+
+        const recipeBtn = document.getElementById('generate-recipe-btn');
+        const recipeInput = document.getElementById('recipe-ingredients');
+        const recipeOutput = document.getElementById('recipe-output');
+        const mealPlanTables = document.querySelectorAll('.meal-plan-table');
+        const aiModal = document.getElementById('ai-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalBody = document.getElementById('modal-body');
+        const modalCloseBtn = document.getElementById('modal-close-btn');
+
+        /**
+         * A reusable function to call the Gemini API.
+         * @param {string} prompt - The prompt to send to the model.
+         * @returns {Promise<string>} - The generated text from the model.
+         */
+        async function callGemini(prompt) {
+            let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
+            const payload = { contents: chatHistory };
+            const apiKey = ""; // API key is handled by the environment
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`API call failed with status: ${response.status}`);
+                }
+
+                const result = await response.json();
+                
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    return result.candidates[0].content.parts[0].text;
+                } else {
+                    console.error("Unexpected API response structure:", result);
+                    return "Sorry, I couldn't generate a response. The API returned an unexpected format.";
+                }
+            } catch (error) {
+                console.error("Error calling Gemini API:", error);
+                return `Sorry, an error occurred: ${error.message}. Please try again later.`;
+            }
+        }
+
+        // 1. AI Recipe Creator
+        recipeBtn.addEventListener('click', async () => {
+            const ingredients = recipeInput.value.trim();
+            if (!ingredients) {
+                recipeOutput.innerHTML = '<p class="text-red-500">Please enter some ingredients.</p>';
+                return;
+            }
+
+            recipeOutput.innerHTML = '<p class="text-gray-500">✨ Generating recipe...</p>';
+            
+            const prompt = `You are a helpful dietitian creating a simple, healthy recipe based on The Nourished Household philosophy. The user has these ingredients: "${ingredients}". Create a recipe with a catchy title, a short ingredient list (including the user's items and common pantry staples), and simple, numbered instructions. The recipe should be balanced, easy to make, and use whole foods. Format the response using HTML with h4 for the title and an ordered list for instructions.`;
+            
+            const recipeHtml = await callGemini(prompt);
+            recipeOutput.innerHTML = recipeHtml;
+        });
+
+        // 2. Meal Variation Suggester (using event delegation)
+        mealPlanTables.forEach(table => {
+            table.addEventListener('click', async (e) => {
+                if (e.target.classList.contains('variation-btn')) {
+                    const mealDescription = e.target.previousElementSibling.textContent;
+                    
+                    modalBody.innerHTML = '<p class="text-gray-500">✨ Thinking of a creative variation...</p>';
+                    aiModal.classList.remove('hidden');
+
+                    const prompt = `You are a creative dietitian. For the meal "${mealDescription}", suggest one interesting and healthy variation. For example, 'Make it vegetarian by...', 'Give it a different cultural twist by...', or 'Lighten it up for summer by...'. Keep the suggestion to 2-3 concise sentences.`;
+
+                    const variationText = await callGemini(prompt);
+                    modalBody.innerHTML = `<p>${variationText}</p>`;
+                }
+            });
+        });
+
+        // Modal close functionality
+        modalCloseBtn.addEventListener('click', () => aiModal.classList.add('hidden'));
+        aiModal.addEventListener('click', (e) => {
+            if (e.target === aiModal) {
+                aiModal.classList.add('hidden');
+            }
+        });
+
+    </script>
+</body>
+</html>
